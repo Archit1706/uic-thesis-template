@@ -3,31 +3,31 @@
 
 \section{Fairness Definitions}
 
-The machine learning fairness literature distinguishes between several families of fairness definitions~\cite{mentalmap}.
+The machine learning fairness literature distinguishes between several families of fairness definitions~\cite{barocas-hardt-narayanan}.
 
 \subsection{Individual Fairness}
 
-Individual fairness, formalized by Dwork et al.\ (2012), requires that similar individuals receive similar outcomes. Formally, for a Lipschitz-continuous mapping $M$, the requirement is $d_Y(M(x), M(x')) \leq L \cdot d_X(x, x')$, where $d_X$ and $d_Y$ are distance metrics in the input and output spaces, respectively. \emph{Counterfactual fairness} extends this notion causally: the prediction should remain unchanged if the protected attribute were counterfactually altered. FairLint-DL's QID metric operationalizes this notion by measuring the entropy of predictions across counterfactual variations of protected attributes.
+Individual fairness, formalized by Dwork et al.~\cite{dwork2012}, requires that similar individuals receive similar outcomes. Formally, for a Lipschitz-continuous mapping $M$, the requirement is $d_Y(M(x), M(x')) \leq L \cdot d_X(x, x')$, where $d_X$ and $d_Y$ are distance metrics in the input and output spaces, respectively. \emph{Counterfactual fairness} extends this notion causally: the prediction should remain unchanged if the protected attribute were counterfactually altered. FairLint-DL's QID metric operationalizes this notion by measuring the entropy of predictions across counterfactual variations of protected attributes.
 
 \subsection{Group Fairness}
 
-Group fairness (statistical fairness) requires parity of some statistical measure across demographic groups~\cite{mentalmap}. Three prominent criteria are:
+Group fairness (statistical fairness) requires parity of some statistical measure across demographic groups~\cite{barocas-hardt-narayanan}. Three prominent criteria are:
 
 \textbf{Demographic Parity} (Independence-Based): $P(\hat{Y}=1 | A=a) = P(\hat{Y}=1 | A=b)$, requiring equal positive prediction rates across groups.
 
-\textbf{Equalized Odds} (Separation-Based): $P(\hat{Y}=1 | A=a, Y=y) = P(\hat{Y}=1 | A=b, Y=y)$ for all $y$, requiring equal true positive rates and false positive rates.
+\textbf{Equalized Odds}~\cite{hardt2016} (Separation-Based): $P(\hat{Y}=1 | A=a, Y=y) = P(\hat{Y}=1 | A=b, Y=y)$ for all $y$, requiring equal true positive rates and false positive rates.
 
 \textbf{Equal Opportunity}: A relaxation of Equalized Odds that requires only equal true positive rates: $P(\hat{Y}=1 | A=a, Y=1) = P(\hat{Y}=1 | A=b, Y=1)$.
 
-Kleinberg et al.\ (2016) proved an impossibility theorem showing that calibration, equalized odds, and unequal base rates cannot be simultaneously satisfied~\cite{mentalmap}, motivating the use of multiple complementary metrics as implemented in FairLint-DL.
+Kleinberg et al.~\cite{kleinberg2016} proved an impossibility theorem showing that calibration, equalized odds, and unequal base rates cannot be simultaneously satisfied, motivating the use of multiple complementary metrics as implemented in FairLint-DL.
 
 \subsection{Causal Fairness}
 
-Causal fairness, grounded in Pearl's framework of structural causal models, requires that the prediction is causally independent of protected attributes. Path-specific fairness further distinguishes between fair and unfair causal pathways, blocking only the latter. FairLint-DL's causal debugging algorithm traces the causal influence of protected attributes through the network's internal structure.
+Causal fairness, grounded in Pearl's framework of structural causal models~\cite{pearl_2009}, requires that the prediction is causally independent of protected attributes. Path-specific fairness further distinguishes between fair and unfair causal pathways, blocking only the latter. FairLint-DL's causal debugging algorithm traces the causal influence of protected attributes through the network's internal structure.
 
 \section{Information-Theoretic Fairness Testing: DICE}
 
-The DICE framework~\cite{dice} introduced Quantitative Individual Discrimination (QID) as an information-theoretic characterization of discrimination. QID is defined as the amount of protected information---characterized by Shannon entropy and min-entropy---used in deriving an outcome. A zero QID value implies the absence of individual discrimination, while higher values indicate greater reliance on protected information. DICE also introduced a causal debugging algorithm (Algorithm~2 in~\cite{dice}) that uses interventions on neuron activations to localize layers and neurons with significant causal effects on QID. On the Adult Census dataset, DICE discovered 36 clusters from 14 initial clusters, generating 230,593 test cases with QID values up to 5.3 bits, and identified the second layer as the most bias-sensitive.
+The DICE framework~\cite{dice} introduced Quantitative Individual Discrimination (QID) as an information-theoretic characterization of discrimination, extending earlier coverage-guided fairness testing approaches~\cite{galhotra2017}. QID is defined as the amount of protected information---characterized by Shannon entropy and min-entropy---used in deriving an outcome. A zero QID value implies the absence of individual discrimination, while higher values indicate greater reliance on protected information. DICE also introduced a causal debugging algorithm (Algorithm~2 in~\cite{dice}) that uses interventions on neuron activations to localize layers and neurons with significant causal effects on QID. On the Adult Census dataset, DICE discovered 36 clusters from 14 initial clusters, generating 230,593 test cases with QID values up to 5.3 bits, and identified the second layer as the most bias-sensitive.
 
 \section{NeuFair: Neural Network Fairness Repair}
 
@@ -43,6 +43,6 @@ FairLay-ML~\cite{fairlayml} presents a GUI MLOps pipeline for fairness debugging
 
 \section{Explainability Methods}
 
-\textbf{SHAP} (SHapley Additive exPlanations) computes the exact contribution of each feature to every prediction using game-theoretic Shapley values. The KernelExplainer variant is model-agnostic and operates on arbitrary prediction functions.
+\textbf{SHAP} (SHapley Additive exPlanations)~\cite{lundberg2017} computes the exact contribution of each feature to every prediction using game-theoretic Shapley values. The KernelExplainer variant is model-agnostic and operates on arbitrary prediction functions.
 
-\textbf{LIME} (Local Interpretable Model-agnostic Explanations) approximates the model locally around each instance with a simple linear model by generating perturbations and observing prediction changes. LIME provides complementary local explanations that can reveal context-dependent bias patterns.
+\textbf{LIME} (Local Interpretable Model-agnostic Explanations)~\cite{ribeiro2016} approximates the model locally around each instance with a simple linear model by generating perturbations and observing prediction changes. LIME provides complementary local explanations that can reveal context-dependent bias patterns.

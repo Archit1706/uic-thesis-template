@@ -3,7 +3,7 @@
 
 \section{Dataset: Adult Census Income}
 
-The Adult Census Income dataset (also known as the ``Census Income'' dataset) contains 32,561 records extracted from the 1994 U.S.\ Census Bureau database. The prediction task is binary classification: whether an individual's annual income exceeds \$50,000. The dataset contains 14 features and exhibits significant class imbalance, with 17,303 instances (53.2\%) in the low-income class and 5,489 instances (16.9\%) in the high-income class.
+The Adult Census Income dataset~\cite{adultdataset} (also known as the ``Census Income'' dataset) contains 32,561 records extracted from the 1994 U.S.\ Census Bureau database. The prediction task is binary classification: whether an individual's annual income exceeds \$50,000. The dataset contains 14 features and exhibits significant class imbalance, with 17,303 instances (53.2\%) in the low-income class and 5,489 instances (16.9\%) in the high-income class.
 
 Four protected attributes were selected for analysis: \textbf{age} (71 unique values), \textbf{race} (5 unique values), \textbf{sex} (2 unique values), and \textbf{native-country} (42 unique values).
 
@@ -136,7 +136,7 @@ Layer 6 (Output) & 2 & 0.124 & 6.4\% \\
 \end{tabular}
 \end{table}
 
-\textbf{Layer 2} (32 neurons) is identified as the most bias-sensitive layer with a sensitivity score of 1.933, indicating that this layer amplifies protected attribute information most strongly. Bias concentrated in early-to-middle layers suggests the network encodes protected information during initial feature transformation before it propagates through deeper layers.
+\textbf{Layer 2} (32 neurons) is identified as the most bias-sensitive layer with a sensitivity score of 1.933, indicating that this layer amplifies protected attribute information most strongly. Bias concentrated in early-to-middle layers suggests the network encodes protected information during initial feature transformation before it propagates through deeper layers. This finding is consistent with the causal debugging results reported by DICE~\cite{dice} on the same Adult Census dataset, which similarly identified the second layer as the most bias-sensitive.
 
 \begin{figure}[H]
     \centering

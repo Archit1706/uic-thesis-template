@@ -9,7 +9,7 @@ The rationale for training a DNN rather than using statistical tests on raw data
 
 \section{Quantitative Individual Discrimination (QID)}
 
-QID measures the causal influence of protected attributes on the model's prediction using information-theoretic metrics.
+QID measures the causal influence of protected attributes on the model's prediction using information-theoretic metrics~\cite{dice}.
 
 \subsection{Shannon Entropy QID}
 
@@ -20,7 +20,7 @@ Given an individual with non-protected value $X = x$ and protected attribute $Z 
     \label{eq:qid_shannon}
 \end{equation}
 
-where $\bar{P}(Y=y | x)$ is the average prediction probability across all counterfactual variations of the protected attributes. The computation proceeds as follows: (1) generate counterfactuals $x'$ by modifying protected attributes of $x$; (2) compute predictions $P(Y | x')$ for all counterfactuals; (3) calculate the entropy of the average prediction distribution. A QID of 0 bits implies perfect fairness, while QID approaching 1 bit (for binary classification) indicates maximum discrimination where the protected attribute completely determines the outcome.
+where $\bar{P}(Y=y | x)$ is the average prediction probability across all counterfactual variations of the protected attributes~\cite{dice}. The computation proceeds as follows: (1) generate counterfactuals $x'$ by modifying protected attributes of $x$; (2) compute predictions $P(Y | x')$ for all counterfactuals; (3) calculate the entropy of the average prediction distribution. A QID of 0 bits implies perfect fairness, while QID approaching 1 bit (for binary classification) indicates maximum discrimination where the protected attribute completely determines the outcome.
 
 \subsection{Min-Entropy QID and Disparate Impact}
 
@@ -31,7 +31,7 @@ FairLint-DL also computes a worst-case metric via min-entropy and the \emph{disp
     \label{eq:disparate_impact}
 \end{equation}
 
-The \emph{four-fifths rule} (80\% rule) establishes that a disparate impact ratio below 0.8 constitutes evidence of adverse impact---a well-established legal standard for employment discrimination under U.S.\ civil rights law.
+The \emph{four-fifths rule} (80\% rule) establishes that a disparate impact ratio below 0.8 constitutes evidence of adverse impact---a well-established legal standard for employment discrimination under U.S.\ civil rights law~\cite{dice}.
 
 \section{Gradient-Guided Discriminatory Instance Search}
 

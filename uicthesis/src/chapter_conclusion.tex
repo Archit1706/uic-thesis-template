@@ -21,7 +21,7 @@ The agreement between SHAP and LIME on the importance of education-num and age p
 
 \section{Sources of Bias}
 
-From the perspective of the fairness taxonomy~\cite{mentalmap}, the bias detected in the Adult Census dataset stems from multiple sources along the data lifecycle:
+The bias detected in the Adult Census dataset stems from multiple sources along the data lifecycle~\cite{barocas-hardt-narayanan}:
 
 \textbf{Pre-data bias:} Historical income inequality between demographic groups (historical bias, structural inequality) is directly encoded in the training labels.
 
@@ -47,7 +47,7 @@ From the perspective of the fairness taxonomy~\cite{mentalmap}, the bias detecte
 
 This report presented FairLint-DL, a VS Code extension for deep learning-based fairness debugging of machine learning datasets. By implementing the shift-left fairness testing paradigm, FairLint-DL enables practitioners to detect, quantify, localize, and explain bias directly within their development environment---before committing to production model architectures.
 
-The system integrates information-theoretic QID metrics, gradient-guided discriminatory instance search, causal debugging with layer and neuron localization, group fairness metrics (Demographic Parity, Equalized Odds, Equal Opportunity), and dual SHAP/LIME explainability into a cohesive six-step analysis pipeline. Evaluation on the Adult Census Income dataset demonstrates both the severity of bias in commonly used benchmark data and the effectiveness of FairLint-DL's multi-faceted analysis approach.
+The system integrates information-theoretic QID metrics, gradient-guided discriminatory instance search, causal debugging with layer and neuron localization, group fairness metrics (Demographic Parity, Equalized Odds, Equal Opportunity), and dual SHAP/LIME explainability into a cohesive six-step analysis pipeline~\cite{dice, neufair}. Evaluation on the Adult Census Income dataset demonstrates both the severity of bias in commonly used benchmark data and the effectiveness of FairLint-DL's multi-faceted analysis approach.
 
 The composite fairness score of approximately 41/100 for the Adult Census dataset, combined with the identification of Layer~2 Neurons~30 and~17 as primary bias drivers and the cross-validated SHAP/LIME feature attributions, provides practitioners with actionable intelligence for fairness remediation. The 12-second analysis time (with cached models) makes iterative fairness assessment practical within the development workflow.
 
@@ -55,13 +55,13 @@ The composite fairness score of approximately 41/100 for the Adult Census datase
 
 Several directions for future research and development emerge from this work:
 
-\textbf{Model retraining with fairness constraints:} Integrating in-processing fairness interventions such as adversarial debiasing, fairness-constrained optimization, or the NeuFair dropout strategy~\cite{neufair} directly into the extension, enabling a closed-loop ``detect--fix--verify'' workflow.
+\textbf{Model retraining with fairness constraints:} Integrating in-processing fairness interventions such as adversarial debiasing, fairness-constrained optimization~\cite{agarwal2018}, or the NeuFair dropout strategy~\cite{neufair} directly into the extension, enabling a closed-loop ``detect--fix--verify'' workflow.
 
 \textbf{Neuron-level interventions:} Implementing selective neuron pruning or activation clamping for the identified bias-critical neurons, guided by the causal debugging results, with real-time fairness score updates.
 
 \textbf{Multi-dataset validation:} Extending evaluation to COMPAS (criminal justice), German Credit (lending), Bank Marketing (financial services), and MEPS (healthcare) datasets to validate generalizability across domains.
 
-\textbf{Intersectional fairness:} Analyzing bias across combinations of protected attributes (e.g., race $\times$ gender $\times$ age) to capture intersectional discrimination that single-attribute analysis may miss~\cite{mentalmap}.
+\textbf{Intersectional fairness:} Analyzing bias across combinations of protected attributes (e.g., race $\times$ gender $\times$ age) to capture intersectional discrimination that single-attribute analysis may miss~\cite{barocas-hardt-narayanan}.
 
 \textbf{Real-time monitoring:} Extending FairLint-DL for continuous fairness monitoring during model development, with automated alerts when fairness metrics degrade below configurable thresholds.
 

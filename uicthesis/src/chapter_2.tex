@@ -82,8 +82,8 @@ The analysis follows a sequential six-step pipeline orchestrated by \texttt{pipe
 \begin{enumerate}
     \item \textbf{Model Training:} Train (or load cached) DNN proxy model on the dataset.
     \item \textbf{Internal Space Visualization:} Extract and reduce layer activations via PCA.
-    \item \textbf{QID Analysis:} Compute Shannon entropy QID, min-entropy QID, disparate impact, and group fairness metrics across all protected attributes.
-    \item \textbf{Discriminatory Instance Search:} Gradient-guided global search followed by perturbation-based local search.
-    \item \textbf{Causal Debugging:} Layer sensitivity analysis followed by neuron-level impact scoring.
+    \item \textbf{QID Analysis:} Compute Shannon entropy QID, min-entropy QID, disparate impact, and group fairness metrics across all protected attributes~\cite{dice}.
+    \item \textbf{Discriminatory Instance Search:} Gradient-guided global search followed by perturbation-based local search~\cite{dice, neufair}.
+    \item \textbf{Causal Debugging:} Layer sensitivity analysis followed by neuron-level impact scoring~\cite{dice}.
     \item \textbf{Explainability:} Batch SHAP (KernelExplainer on log-odds) and LIME explanations with interactive per-instance explorer.
 \end{enumerate}
