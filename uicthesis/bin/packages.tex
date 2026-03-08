@@ -18,7 +18,6 @@
 \usepackage{subfigure}
 %\usepackage[sectionbib, numbers]{natbib}
 %\usepackage{chapterbib}
-%\usepackage{hyperref}
 \usepackage[dvipsnames]{xcolor}
 \usepackage[final]{pdfpages}
 \usepackage[T1]{fontenc}
@@ -26,6 +25,51 @@
 \usepackage[inline]{enumitem}
 \usepackage[chapter]{algorithm}
 \usepackage[newparttoc]{titlesec}
+
+% Additional packages for FairLint-DL project report
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{hyperref}
+
+% Code listing colors and style
+\definecolor{codebg}{rgb}{0.95,0.95,0.97}
+\definecolor{codegreen}{rgb}{0,0.5,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{codebg},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    frame=single,
+    framesep=5pt,
+    xleftmargin=15pt,
+    xrightmargin=5pt
+}
+\lstset{style=mystyle}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!70!black,
+    citecolor=green!50!black,
+    urlcolor=blue!60!black
+}
 
 
 %\usepackage{ifpdf}

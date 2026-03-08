@@ -1,3 +1,101 @@
-\def\CommonPath{papers/paper_3}%
-\def\CHID{d18f}
-\input{papers/paper_3/paper_3.tex}
+\chapter{Algorithmic Methodology}
+\label{ch:methodology}
+
+\section{Deep Neural Network Proxy Model}
+
+FairLint-DL trains a feedforward DNN as a proxy model to serve as a ``fairness oracle.'' The default architecture uses a 6-layer fully-connected network with $\langle 64, 32, 16, 8, 4, 2 \rangle$ neurons, following the architecture used in prior fairness testing literature~\cite{dice, neufair}. Each hidden layer applies Batch Normalization, ReLU activation, and Dropout ($p=0.2$) for regularization. The model is trained with CrossEntropyLoss and the Adam optimizer (learning rate $= 0.001$) with early stopping (patience $= 10$ epochs).
+
+The rationale for training a DNN rather than using statistical tests on raw data is fourfold: (1) the network learns non-linear decision boundaries revealing complex feature interactions; (2) counterfactual analysis requires a differentiable model; (3) gradient-based search requires backpropagation; and (4) causal debugging traces bias through internal representations.
+
+\section{Quantitative Individual Discrimination (QID)}
+
+QID measures the causal influence of protected attributes on the model's prediction using information-theoretic metrics.
+
+\subsection{Shannon Entropy QID}
+
+Given an individual with non-protected value $X = x$ and protected attribute $Z = z$, the Shannon entropy QID quantifies the uncertainty in prediction introduced by varying $Z$ while keeping $X$ constant:
+
+\begin{equation}
+    \text{QID}_{\text{Shannon}}(x) = H(Y | X = x) = -\sum_{y} \bar{P}(Y=y | x) \log_2 \bar{P}(Y=y | x)
+    \label{eq:qid_shannon}
+\end{equation}
+
+where $\bar{P}(Y=y | x)$ is the average prediction probability across all counterfactual variations of the protected attributes. The computation proceeds as follows: (1) generate counterfactuals $x'$ by modifying protected attributes of $x$; (2) compute predictions $P(Y | x')$ for all counterfactuals; (3) calculate the entropy of the average prediction distribution. A QID of 0 bits implies perfect fairness, while QID approaching 1 bit (for binary classification) indicates maximum discrimination where the protected attribute completely determines the outcome.
+
+\subsection{Min-Entropy QID and Disparate Impact}
+
+FairLint-DL also computes a worst-case metric via min-entropy and the \emph{disparate impact ratio}:
+
+\begin{equation}
+    \text{DI}(x) = \frac{\min_{z} P(\hat{Y}=1 | x, z)}{\max_{z} P(\hat{Y}=1 | x, z)}
+    \label{eq:disparate_impact}
+\end{equation}
+
+The \emph{four-fifths rule} (80\% rule) establishes that a disparate impact ratio below 0.8 constitutes evidence of adverse impact---a well-established legal standard for employment discrimination under U.S.\ civil rights law.
+
+\section{Gradient-Guided Discriminatory Instance Search}
+
+The search for discriminatory instances is formulated as a two-phase optimization problem, inspired by DICE~\cite{dice} and extended by NeuFair~\cite{neufair}.
+
+\subsection{Phase 1: Global Search (Gradient Ascent)}
+
+The global phase maximizes the QID score directly using gradient ascent. The objective function maximizes the variance of predictions across counterfactuals. Gradients of the QID loss are backpropagated with respect to the input features $x$, yielding an input $x_{\text{global}}$ that maximizes discrimination potential.
+
+\subsection{Phase 2: Local Search (Perturbation)}
+
+The local phase explores the neighborhood of $x_{\text{global}}$ by adding Gaussian noise to non-protected features and filtering neighbors that exceed the QID threshold ($> 0.1$ bits), producing concrete discriminatory instances as evidence.
+
+\section{Causal Debugging}
+
+\subsection{Layer Localization}
+
+Layer localization determines which layer is most sensitive to discriminatory inputs by computing the gradient of layer activations $L_i(x)$ with respect to the input $x$ and aggregating the magnitude of these gradients for known discriminatory instances:
+
+\begin{equation}
+    \delta_l = \max_{x \in I} \Delta\left(\mathcal{D}_l(z, x), \mathcal{D}_l(z', x)\right)
+    \label{eq:layer_sensitivity}
+\end{equation}
+
+where $I$ is the set of discriminatory test cases and $\Delta$ is the $L_1$-norm distance function. A normalized sensitivity score $\rho_l = (\delta_l - \delta_{\max,l}) / (\delta_{\max,l} + 1)$ identifies the layer with the highest relative sensitivity as the bias-critical layer.
+
+\subsection{Neuron Localization}
+
+Within the bias-critical layer, neuron localization identifies individual neurons encoding protected information. Following the Average Causal Difference (ACD) framework from DICE~\cite{dice}, the tool intervenes on each neuron by forcing it active ($n > 0$) or inactive ($n = 0$) and measures the resulting change in QID:
+
+\begin{equation}
+    \text{ACD}_{l,j} = \mathbb{E}\left[\text{QID} \mid \text{do}(l, j, v^{>0})\right] - \mathbb{E}\left[\text{QID} \mid \text{do}(l, j, v^{=0})\right]
+    \label{eq:acd}
+\end{equation}
+
+Neurons with disproportionately high impact scores are candidates for pruning, retraining, or regularization in a fairness remediation workflow.
+
+\section{Group Fairness Metrics}
+
+FairLint-DL complements individual-level QID with three group-level fairness metrics. Groups are defined by the standardized protected attribute value: Group~A ($\leq 0$, at or below the mean) and Group~B ($> 0$, above the mean).
+
+\textbf{Demographic Parity} measures whether positive prediction rates are equal: $\text{DP}_{\text{diff}} = |P(\hat{Y}=1 | A) - P(\hat{Y}=1 | B)|$.
+
+\textbf{Equalized Odds} compares both TPR and FPR: $\text{EO}_{\max} = \max(|\text{TPR}_A - \text{TPR}_B|, |\text{FPR}_A - \text{FPR}_B|)$.
+
+\textbf{Equal Opportunity} focuses solely on TPR equality: $\text{EOpp}_{\text{diff}} = |\text{TPR}_A - \text{TPR}_B|$.
+
+\section{Explainability: SHAP and LIME}
+
+\subsection{SHAP on Log-Odds Space}
+
+A critical design decision: FairLint-DL computes SHAP values on the log-odds (margin) output rather than softmax probabilities. The margin is defined as $\text{margin} = \text{logit}(\text{class}=1) - \text{logit}(\text{class}=0) = \log(P(>50K) / P(\leq 50K))$. This is mathematically important because softmax compresses differences (understating true feature contributions), whereas the log-odds space is linear and preserves the scale of feature effects.
+
+\subsection{LIME Local Explanations}
+
+LIME generates 500 perturbations per instance, fits a local linear model, and identifies the feature conditions with the greatest influence on individual predictions. The interactive LIME explorer allows practitioners to test specific scenarios via custom feature values.
+
+\section{Composite Fairness Score}
+
+The composite score maps to a 0--100 scale with five penalty components:
+
+\begin{equation}
+    \text{Score} = 100 - P_{\text{meanQID}} - P_{\text{pctDisc}} - P_{\text{DI}} - P_{\text{maxQID}} - P_{\text{group}}
+    \label{eq:score}
+\end{equation}
+
+where $P_{\text{meanQID}} = \min(\text{mean\_qid} \times 15, 30)$, $P_{\text{pctDisc}} = \min(\text{pct\_disc} \times 0.3, 30)$, $P_{\text{DI}} = (0.8 - \text{DI}) \times 50$ if $\text{DI} < 0.8$, $P_{\text{maxQID}} = \min(\text{max\_qid} \times 5, 20)$, and $P_{\text{group}} = \min((\overline{\text{DP}_{\text{diff}}} + \overline{\text{EO}_{\max}}) \times 25, 20)$.

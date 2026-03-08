@@ -1,5 +1,5 @@
-%% UICTHESI.TEX
-%% Author: Arindam Bose
+%% UICTHESI.TEX — MS Project Report
+%% Author: Archit Rathod
 %% University of Illinois at Chicago
 %
 \documentclass{bin/uicthesi}
@@ -7,61 +7,82 @@
 % helpers
 \input{bin/packages.tex}
 \input{bin/settings.tex}
-\input{bin/symbols.tex} % version 2.0.11 compatible
+\input{bin/symbols.tex}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% CHAPTER CODES
-% chapter_introduction	: 2f09
-% chapter_1				: 4c3f
-% chapter_2				: a269
-% chapter_3				: d18f
-% chapter_4				: 074d
-% chapter_5				: 1a36
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Override \maketitle to say PROJECT REPORT instead of THESIS
+%% and Evaluation Committee instead of Defense Committee
+\makeatletter
+\def\maketitle{%
+   \begin{titlepage}
+      \centering
+      \thispagestyle{empty}
+      \c@page=2
+      \vbox to 0pt{%
+         \begin{center}
+            \large\transparentbold\@title
+         \end{center}\vss}
+      \vfill
+      \begin{singlespace}
+         BY
+         \vskip\baselineskip
+         \begin{tabular}{c}
+            \@upauthor\\\@pdegrees
+         \end{tabular}
+         \vfill
+         \vbox to 0pt{\vss
+            \begin{center}
+               \vskip \baselineskip
+               PROJECT REPORT\\
+               \vskip \baselineskip
+               Submitted as partial fulfillment of the requirements\\
+               for the degree of \@degree\\
+               in the Graduate College of the\\
+               University of Illinois at Chicago, \@date
+               \vskip 2\baselineskip
+               Chicago, Illinois
+               \vskip 3\baselineskip
+            \end{center}}
+         \begin{flushleft}
+         Evaluation Committee:\\
+         \vskip \baselineskip
+         \begin{minipage}{.1\textwidth}
+         \end{minipage}
+         \hfill
+         \begin{minipage}{.9\textwidth}
+            \@committee
+         \end{minipage}
+        \end{flushleft}
+      \end{singlespace}
+   \end{titlepage}}
+\makeatother
 
 % Declarations for front matter
-\title{Title of Your Thesis}
-\author{Author's Name}
-\pdegrees{Author's degree, year}
-\degree{Doctor of Philosophy in Electrical and Computer Engineering}
-\committee{Member 1, Chair and Advisor \\ 
-	Member 2 \\ 
-	Member 3 \\ 
-	Member 4 \\ 
-	Member 5, Affiliation}
+\title{FairLint-DL: Deep Learning-Based Fairness Debugging for Machine Learning Datasets}
+\author{Archit Rathod}
+\pdegrees{B.S. in Computer Science}
+\degree{Master of Science in Computer Science}
+\committee{Saeid Tizpaz-Niari, Advisor \\
+	Abolfazl Asudeh, Secondary Evaluator}
 \makeatletter
 
 \begin{document}
 \maketitle
 \copyrightpage
 
-% supplimentary pages
-\dedication\input{src/dedications.tex}
+% supplementary pages
 \acknowledgements\input{src/acknowledgements.tex}
-\preface\input{src/preface.tex}
-\authorscontribution\input{src/contribution.tex}
 \tableofcontents
 \listoftables
 \listoffigures
-\listofalgorithm
-\listofabbreviations\input{src/abbreviations.tex}
-\listofnotations\input{src/notations.tex}
 \summary\input{src/summary.tex}
 
 % chapters
 \input{src/chapter_introduction.tex}
-\part[Part I]{Part I}
-	\subpart{Subpart I A}
-		\input{src/chapter_1.tex}
-	\subpart{Subpart I B}
-		\input{src/chapter_2.tex}
-\part[Part II]{Part II}
-	\subpart{Subpart II A}
-		\input{src/chapter_3.tex}
-	\subpart{Subpart II B}
-		\input{src/chapter_4.tex}
-	\subpart{Subpart II C}
-		\input{src/chapter_5.tex}
+\input{src/chapter_1.tex}
+\input{src/chapter_2.tex}
+\input{src/chapter_3.tex}
+\input{src/chapter_4.tex}
+\input{src/chapter_5.tex}
 \input{src/chapter_conclusion.tex}
 
 % appendices
@@ -72,6 +93,5 @@
 \bibformb
 \bibliography{src/bibphd.bib}
 
-\vita\input{src/vita.tex}
 \makeatother
 \end{document}

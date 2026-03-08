@@ -1,3 +1,68 @@
-\chapter{Conclusion}\label{ch:7483}
+\chapter{Discussion}
+\label{ch:discussion}
 
-A conclusion is a good thing to have. Hopefully it is a good one!
+\section{Interpretation of Results}
+
+The Adult Census dataset exhibits significant and pervasive fairness concerns when analyzed through FairLint-DL's deep neural network proxy model. Five key findings emerge:
+
+\textbf{(1) Pervasive individual discrimination:} 95.8\% of analyzed instances show QID above the 0.1-bit threshold, meaning the model changes its prediction for nearly every individual when protected attributes are altered. This is not an isolated phenomenon affecting edge cases but a systemic property of the learned decision boundary.
+
+\textbf{(2) High average bias:} A mean QID of 0.640 bits (out of a maximum of 1.0 for binary classification) indicates that protected attributes carry substantial influence over predictions---more than half the theoretical maximum information leakage.
+
+\textbf{(3) Legal threshold violations:} 69.8\% of instances violate the four-fifths rule (disparate impact $< 0.8$), suggesting the model would likely fail legal scrutiny for disparate impact under U.S.\ civil rights law.
+
+\textbf{(4) Group-level disparities:} Sex and age exhibit the most severe group-level bias. The demographic parity ratio of 0.298 for sex means females receive favorable predictions at less than one-third the rate of males. This reflects well-documented historical income disparities embedded in the training data.
+
+\textbf{(5) Bias localization:} Causal debugging identifies Layer~2 as the bias-critical layer, with specific neurons (30 and 17) encoding protected information. This localization enables targeted remediation strategies such as selective neuron dropout~\cite{neufair} or regularization, rather than wholesale model retraining.
+
+\section{Cross-Method Validation}
+
+The agreement between SHAP and LIME on the importance of education-num and age provides robust evidence for these findings. Interestingly, while race shows minimal direct SHAP importance (0.010), the QID analysis reveals significant discrimination across racial groups (DP ratio: 0.564). This discrepancy suggests that race influences predictions indirectly through correlated proxy features---a form of proxy discrimination that is particularly insidious because it may not be detected by single-method analysis.
+
+\section{Sources of Bias}
+
+From the perspective of the fairness taxonomy~\cite{mentalmap}, the bias detected in the Adult Census dataset stems from multiple sources along the data lifecycle:
+
+\textbf{Pre-data bias:} Historical income inequality between demographic groups (historical bias, structural inequality) is directly encoded in the training labels.
+
+\textbf{Data processing bias:} Proxy variables such as occupation, relationship status, and hours-per-week are strongly correlated with protected attributes, creating indirect pathways for discrimination (proxy discrimination, Simpson's paradox).
+
+\textbf{Model bias:} The DNN's optimization objective (cross-entropy loss) maximizes overall accuracy without fairness constraints, leading to disparate performance across demographic subgroups (evaluation bias, objective function bias).
+
+\section{Limitations}
+
+\textbf{Proxy model limitation:} FairLint-DL trains its own DNN proxy model rather than analyzing an externally provided model. The bias detected reflects the proxy model's behavior, which may differ from a production model trained with different architectures or fairness constraints.
+
+\textbf{Group definition:} Using standardized values ($\leq 0$ vs.\ $> 0$) for group splitting is appropriate for binary attributes (sex) but may not capture meaningful group boundaries for continuous attributes (age) or multi-class attributes (race with 5 categories).
+
+\textbf{Single-dataset evaluation:} This report evaluates FairLint-DL on a single benchmark dataset. While the Adult Census dataset is widely used in fairness research, evaluation on additional datasets (COMPAS, German Credit, Bank Marketing) would strengthen the generalizability claims.
+
+\textbf{Scalability:} SHAP's KernelExplainer has quadratic complexity in the number of features, making it the computational bottleneck (7 seconds of the 12-second total). For datasets with many features, this may require sampling-based approximations.
+
+
+\chapter{Conclusion and Future Work}
+\label{ch:conclusion}
+
+\section{Conclusion}
+
+This report presented FairLint-DL, a VS Code extension for deep learning-based fairness debugging of machine learning datasets. By implementing the shift-left fairness testing paradigm, FairLint-DL enables practitioners to detect, quantify, localize, and explain bias directly within their development environment---before committing to production model architectures.
+
+The system integrates information-theoretic QID metrics, gradient-guided discriminatory instance search, causal debugging with layer and neuron localization, group fairness metrics (Demographic Parity, Equalized Odds, Equal Opportunity), and dual SHAP/LIME explainability into a cohesive six-step analysis pipeline. Evaluation on the Adult Census Income dataset demonstrates both the severity of bias in commonly used benchmark data and the effectiveness of FairLint-DL's multi-faceted analysis approach.
+
+The composite fairness score of approximately 41/100 for the Adult Census dataset, combined with the identification of Layer~2 Neurons~30 and~17 as primary bias drivers and the cross-validated SHAP/LIME feature attributions, provides practitioners with actionable intelligence for fairness remediation. The 12-second analysis time (with cached models) makes iterative fairness assessment practical within the development workflow.
+
+\section{Future Work}
+
+Several directions for future research and development emerge from this work:
+
+\textbf{Model retraining with fairness constraints:} Integrating in-processing fairness interventions such as adversarial debiasing, fairness-constrained optimization, or the NeuFair dropout strategy~\cite{neufair} directly into the extension, enabling a closed-loop ``detect--fix--verify'' workflow.
+
+\textbf{Neuron-level interventions:} Implementing selective neuron pruning or activation clamping for the identified bias-critical neurons, guided by the causal debugging results, with real-time fairness score updates.
+
+\textbf{Multi-dataset validation:} Extending evaluation to COMPAS (criminal justice), German Credit (lending), Bank Marketing (financial services), and MEPS (healthcare) datasets to validate generalizability across domains.
+
+\textbf{Intersectional fairness:} Analyzing bias across combinations of protected attributes (e.g., race $\times$ gender $\times$ age) to capture intersectional discrimination that single-attribute analysis may miss~\cite{mentalmap}.
+
+\textbf{Real-time monitoring:} Extending FairLint-DL for continuous fairness monitoring during model development, with automated alerts when fairness metrics degrade below configurable thresholds.
+
+\textbf{Alternative model architectures:} Supporting external model analysis (not just proxy models) and extending to non-tabular data domains including NLP (LLM bias) and computer vision (representation bias).

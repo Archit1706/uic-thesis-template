@@ -1,20 +1,84 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\CHID{1a36}
-\chapter{}\label{\CHID_app:a}
-\appendixtitle{Proof of convergence }
-\lipsum[1]
+\chapter{}\label{app:dashboard}
+\appendixtitle{Full Results Dashboard}
 
-\chapter{}\label{\CHID_app:b}
-\appendixtitle{Time-complexity analysis of the Algorithm}
-\lipsum[2]
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.85\textwidth}{\centering\vspace{0.8cm}
+    \textbf{[INSERT FIGURE: Full Dashboard Screenshot --- Overview Section]}\\[0.3cm]
+    \textit{Full-width screenshot of the FairLint-DL dashboard showing the pipeline overview, dataset summary, protected attributes, and fairness score gauge.}
+    \vspace{0.7cm}}}
+    \caption{FairLint-DL dashboard: Pipeline overview and fairness score.}
+    \label{fig:dashboard_overview}
+\end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\def\CHID{d4db}
-\chapter{}\label{\CHID_app:1}
-\appendixtitle{Proof}
-\lipsum[3]
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.85\textwidth}{\centering\vspace{0.8cm}
+    \textbf{[INSERT FIGURE: Full Dashboard Screenshot --- QID Section]}\\[0.3cm]
+    \textit{Screenshot of the QID analysis section showing mean/max/std QID values, discrimination percentage, disparate impact ratio, and the QID distribution histogram.}
+    \vspace{0.7cm}}}
+    \caption{FairLint-DL dashboard: QID analysis section.}
+    \label{fig:dashboard_qid}
+\end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Copyright Permissions}  \label{app:copyright}
-In this appendix, we present the copyright permissions for the articles, whose contents were used in this thesis.
-\includepdf[pages=-,pagecommand={},width=1.1\textwidth]{copyrights/copyright_1.pdf}
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.85\textwidth}{\centering\vspace{0.8cm}
+    \textbf{[INSERT FIGURE: Full Dashboard Screenshot --- Group Fairness Section]}\\[0.3cm]
+    \textit{Screenshot showing the group fairness metrics with attribute selector, DP/EO/EOpp metric cards with Fair/Marginal/Unfair badges, and per-group comparison charts.}
+    \vspace{0.7cm}}}
+    \caption{FairLint-DL dashboard: Group fairness metrics section.}
+    \label{fig:dashboard_group}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.85\textwidth}{\centering\vspace{0.8cm}
+    \textbf{[INSERT FIGURE: Full Dashboard Screenshot --- Causal Debugging Section]}\\[0.3cm]
+    \textit{Screenshot showing the layer sensitivity bar chart, most biased layer identification, and neuron impact bar chart with interpretive text.}
+    \vspace{0.7cm}}}
+    \caption{FairLint-DL dashboard: Causal debugging section.}
+    \label{fig:dashboard_causal}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.85\textwidth}{\centering\vspace{0.8cm}
+    \textbf{[INSERT FIGURE: Full Dashboard Screenshot --- SHAP/LIME Section]}\\[0.3cm]
+    \textit{Screenshot showing the SHAP global importance bar chart, beeswarm plot, LIME aggregated importance, and the interactive LIME explorer with a per-instance explanation.}
+    \vspace{0.7cm}}}
+    \caption{FairLint-DL dashboard: SHAP and LIME explainability section.}
+    \label{fig:dashboard_explain}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.85\textwidth}{\centering\vspace{0.8cm}
+    \textbf{[INSERT FIGURE: Internal Space Visualization]}\\[0.3cm]
+    \textit{PCA scatter plots for each layer showing how the network separates data points, colored by protected attribute values. Observe the increasing separation in deeper layers.}
+    \vspace{0.7cm}}}
+    \caption{Internal space PCA visualization across network layers.}
+    \label{fig:internal_space}
+\end{figure}
+
+\chapter{}\label{app:confusion}
+\appendixtitle{Confusion Matrices}
+
+\begin{table}[H]
+\centering
+\caption{Per-group confusion matrices for all protected attributes.}
+\label{tab:confusion}
+\small
+\begin{tabular}{@{}ll rrrr rrrr@{}}
+\toprule
+& & \multicolumn{4}{c}{\textbf{Group A ($\leq 0$)}} & \multicolumn{4}{c}{\textbf{Group B ($> 0$)}} \\
+\cmidrule(lr){3-6} \cmidrule(lr){7-10}
+\textbf{Attribute} & \textbf{Size} & TP & FP & TN & FN & TP & FP & TN & FN \\
+\midrule
+Age & 3531/2982 & 262 & 73 & 2934 & 262 & 623 & 199 & 1739 & 421 \\
+Race & 980/5533 & 77 & 28 & 794 & 81 & 808 & 244 & 3879 & 602 \\
+Sex & 2158/4355 & 120 & 29 & 1884 & 125 & 765 & 243 & 2789 & 558 \\
+Native-c. & 644/5869 & 67 & 23 & 498 & 56 & 818 & 249 & 4175 & 627 \\
+\bottomrule
+\end{tabular}
+\end{table}

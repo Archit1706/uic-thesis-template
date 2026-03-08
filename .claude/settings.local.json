@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"C:\\\\Users\\\\archi\\\\Downloads\\\\University_of_Illinois_at_Chicago_Electrical_and_Computer_Engineering_Thesis_Template\\\\uicthesis\\\\src\"\" /B)"
+    ]
+  }
+}

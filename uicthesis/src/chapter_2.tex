@@ -1,3 +1,92 @@
-\def\CommonPath{papers/paper_2}%
-\def\CHID{a269}
-\input{papers/paper_2/paper_2.tex}
+\chapter{System Architecture and Design}
+\label{ch:architecture}
+
+\section{Client-Server Architecture}
+
+FairLint-DL operates as a client-server application with two primary components communicating over HTTP/REST on \texttt{localhost:8765}:
+
+\begin{itemize}
+    \item \textbf{VS Code Extension (Client):} Written in TypeScript, the extension handles all user interaction, file system access, WebView dashboard rendering with Plotly.js charts, and manages the lifecycle of the Python backend.
+    \item \textbf{Python FastAPI Backend (Server):} Hosts the PyTorch models and all analysis algorithms, including data preprocessing, model training, QID computation, causal debugging, discriminatory instance search, and SHAP/LIME explainability.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.85\textwidth}{\centering\vspace{0.5cm}
+    \textbf{[INSERT FIGURE: Architecture Diagram]}\\[0.3cm]
+    \textit{Screenshot of the client-server architecture showing the VS Code Extension (TypeScript) communicating with the Python FastAPI Backend via REST endpoints: POST /train, POST /activations, POST /analyze, POST /search, POST /debug, POST /explain, POST /columns.}
+    \vspace{0.5cm}}}
+    \caption{FairLint-DL client-server architecture overview.}
+    \label{fig:architecture}
+\end{figure}
+
+When the extension activates, it spawns the Python backend as a child process via \texttt{python -m uvicorn bias\_server:app --port 8765} and polls the health endpoint (\texttt{GET /}) until the server responds, retrying up to 15 times with 1-second intervals.
+
+\section{REST API Endpoints}
+
+The backend exposes seven endpoints that correspond to the six-step analysis pipeline:
+
+\begin{table}[H]
+\centering
+\caption{FairLint-DL REST API endpoints.}
+\label{tab:api}
+\begin{tabular}{@{}llp{7cm}@{}}
+\toprule
+\textbf{Endpoint} & \textbf{Method} & \textbf{Description} \\
+\midrule
+\texttt{/} & GET & Health check \\
+\texttt{/columns} & POST & Returns column names, sample data, auto-detected sensitive features \\
+\texttt{/train} & POST & Trains proxy model (or loads from cache); supports \texttt{force\_retrain} \\
+\texttt{/activations} & POST & Returns PCA/t-SNE reduced layer activations \\
+\texttt{/analyze} & POST & Computes QID metrics and group fairness metrics \\
+\texttt{/search} & POST & Runs global/local discriminatory instance search \\
+\texttt{/debug} & POST & Performs layer and neuron sensitivity analysis \\
+\texttt{/explain} & POST & Generates batch SHAP/LIME explanations \\
+\texttt{/explain-instance} & POST & Single-instance LIME explanation (by index or custom values) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Project Structure}
+
+The codebase is organized into the following directory structure:
+
+\begin{lstlisting}[language={}, caption={FairLint-DL project structure.}]
+fairlint-dl/
++-- python_backend/        # Analysis Server
+|   +-- analyzers/         # Core Algorithmic Logic
+|   |   +-- causal_debugger.py    # Layer/Neuron attribution
+|   |   +-- qid_analyzer.py       # Entropy-based metrics
+|   |   +-- search.py             # Gradient-guided search
+|   |   +-- explainability.py     # SHAP and LIME explanations
+|   |   +-- group_fairness.py     # DP, EO, EOpp metrics
+|   |   +-- internal_space.py     # PCA/t-SNE visualization
+|   +-- models/
+|   |   +-- fairness_dnn.py       # PyTorch DNN definition
+|   +-- utils/
+|   |   +-- data_loader.py        # CSV loading, encoding, scaling
+|   |   +-- model_cache.py        # SHA-256 caching system
+|   +-- bias_server.py            # FastAPI entry point
++-- src/                   # VS Code Extension Source
+|   +-- extension.ts              # Main entry point
+|   +-- analysis/pipeline.ts      # 6-step pipeline orchestration
+|   +-- webview/
+|       +-- results.ts            # WebView panel management
+|       +-- htmlBuilder.ts        # Dashboard HTML generation
+|       +-- charts.ts             # Plotly.js chart rendering
+|       +-- scoring.ts            # Composite fairness score
++-- package.json                  # Extension manifest
+\end{lstlisting}
+
+\section{Six-Step Analysis Pipeline}
+
+The analysis follows a sequential six-step pipeline orchestrated by \texttt{pipeline.ts}:
+
+\begin{enumerate}
+    \item \textbf{Model Training:} Train (or load cached) DNN proxy model on the dataset.
+    \item \textbf{Internal Space Visualization:} Extract and reduce layer activations via PCA.
+    \item \textbf{QID Analysis:} Compute Shannon entropy QID, min-entropy QID, disparate impact, and group fairness metrics across all protected attributes.
+    \item \textbf{Discriminatory Instance Search:} Gradient-guided global search followed by perturbation-based local search.
+    \item \textbf{Causal Debugging:} Layer sensitivity analysis followed by neuron-level impact scoring.
+    \item \textbf{Explainability:} Batch SHAP (KernelExplainer on log-odds) and LIME explanations with interactive per-instance explorer.
+\end{enumerate}

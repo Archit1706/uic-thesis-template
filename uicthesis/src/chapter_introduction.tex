@@ -1,3 +1,43 @@
-\def \CommonPath {papers/introduction}%
-\def \CHID {2f09}
-\input{papers/introduction/introduction.tex}
+\chapter{Introduction}
+\label{ch:introduction}
+
+\section{Motivation}
+
+The proliferation of deep neural networks (DNNs) in high-stakes decision-making systems has introduced significant concerns regarding algorithmic fairness. Instances of such AI-assisted software include systems deciding on recidivism risk~\cite{dice}, software predicting benefit eligibility, and tools deciding whether to audit a given taxpayer. The DNN-based software development process, driven by the principle of information bottleneck~\cite{dice}, involves a delicate balancing act between over-fitting and detecting useful, parsimonious patterns. It is therefore not surprising that such solutions often encode and amplify pre-existing biases in the training data. Worse, improper training may even introduce biases not present in the training data or irrelevant to the decision-making task. The resulting fairness defects may not only disadvantage protected groups but may also violate statutory requirements such as the Civil Rights Act's disparate impact provisions and the EU AI Act's fairness mandates.
+
+From a philosophical perspective, fairness in machine learning exists at the intersection of multiple frameworks: utilitarianism (maximizing overall welfare), egalitarianism (reducing inequality), and Rawlsian justice (max--min fairness)~\cite{mentalmap}. The legal landscape further distinguishes between \emph{disparate treatment}---intentional discrimination based on protected attributes---and \emph{disparate impact}---facially neutral policies that disproportionately affect protected groups. FairLint-DL addresses both dimensions through its combination of individual-level counterfactual analysis and group-level statistical fairness metrics.
+
+\section{The Shift-Left Fairness Testing Paradigm}
+
+Current fairness tools predominantly operate in a post-training paradigm: practitioners must complete the full model development lifecycle---data collection, preprocessing, feature engineering, model selection, hyperparameter tuning, and training---before evaluating bias. Tools such as IBM's AI Fairness 360, Google's What-If Tool, and Microsoft's Fairlearn~\cite{evt} provide valuable post-hoc analysis but require significant upfront investment before fairness issues are identified.
+
+FairLint-DL introduces a \emph{shift-left} approach to fairness testing, analogous to shift-left testing in software engineering. By integrating directly into the developer's IDE as a VS Code extension, FairLint-DL enables practitioners to assess dataset bias \emph{before} committing to a specific model architecture or training pipeline. This approach offers several advantages: bias detected early is cheaper to fix (modifying datasets is less expensive than retraining models), the feedback loop is tighter (results appear in the same environment where code is written), and the barrier to fairness testing is lowered (no separate tool or workflow is required).
+
+\section{Problem Statement}
+
+Given a tabular dataset $A = (A_X, A_Z)$ partitioned into non-protected variables $X = X_1 \times X_2 \cdots \times X_n$ (such as profession, income, and education) and protected variables $Z = Z_1 \times Z_2 \cdots \times Z_r$ (such as race, sex, and age), and a DNN $\mathcal{D}: X \times Z \rightarrow [0,1]^t$ trained on $A$, FairLint-DL seeks to:
+
+\begin{enumerate}[label=(\arabic*)]
+    \item \textbf{Quantify} the amount of protected information used in deriving outcomes, measured in bits via Shannon entropy and min-entropy;
+    \item \textbf{Search} the input space for discriminatory instances that maximize the use of protected information;
+    \item \textbf{Localize} the bias to specific layers and neurons within the DNN through causal debugging; and
+    \item \textbf{Explain} which input features drive the bias through SHAP and LIME attribution methods.
+\end{enumerate}
+
+\section{Contributions}
+
+The key contributions of this project are:
+
+\begin{enumerate}[label=(\arabic*)]
+    \item An IDE-integrated fairness testing tool that implements the shift-left paradigm for bias detection in machine learning datasets.
+    \item Implementation of information-theoretic QID metrics combining Shannon entropy and min-entropy for quantitative discrimination measurement.
+    \item A gradient-guided two-phase search algorithm for discovering discriminatory instances in the input space.
+    \item Causal debugging that localizes bias to specific DNN layers and neurons using sensitivity analysis and activation magnitude scoring.
+    \item Dual explainability via SHAP and LIME with cross-method validation for robust feature attribution.
+    \item A composite fairness scoring system integrating individual-level QID and group-level fairness metrics (Demographic Parity, Equalized Odds, Equal Opportunity).
+    \item Comprehensive empirical evaluation on the Adult Census Income dataset demonstrating severe and pervasive bias across multiple protected attributes.
+\end{enumerate}
+
+\section{Report Organization}
+
+The remainder of this report is organized as follows. Chapter~\ref{ch:background} surveys the theoretical foundations and related work. Chapter~\ref{ch:architecture} presents the system architecture and design. Chapter~\ref{ch:methodology} details the algorithmic methodology. Chapter~\ref{ch:implementation} describes the implementation. Chapter~\ref{ch:evaluation} presents the experimental evaluation on the Adult Census dataset. Chapter~\ref{ch:discussion} discusses findings and limitations. Chapter~\ref{ch:conclusion} concludes with directions for future work.

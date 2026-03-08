@@ -1,3 +1,48 @@
-\def\CommonPath{papers/paper_1}%
-\def\CHID{4c3f}
-\input{papers/paper_1/paper_1.tex}
+\chapter{Background and Related Work}
+\label{ch:background}
+
+\section{Fairness Definitions}
+
+The machine learning fairness literature distinguishes between several families of fairness definitions~\cite{mentalmap}.
+
+\subsection{Individual Fairness}
+
+Individual fairness, formalized by Dwork et al.\ (2012), requires that similar individuals receive similar outcomes. Formally, for a Lipschitz-continuous mapping $M$, the requirement is $d_Y(M(x), M(x')) \leq L \cdot d_X(x, x')$, where $d_X$ and $d_Y$ are distance metrics in the input and output spaces, respectively. \emph{Counterfactual fairness} extends this notion causally: the prediction should remain unchanged if the protected attribute were counterfactually altered. FairLint-DL's QID metric operationalizes this notion by measuring the entropy of predictions across counterfactual variations of protected attributes.
+
+\subsection{Group Fairness}
+
+Group fairness (statistical fairness) requires parity of some statistical measure across demographic groups~\cite{mentalmap}. Three prominent criteria are:
+
+\textbf{Demographic Parity} (Independence-Based): $P(\hat{Y}=1 | A=a) = P(\hat{Y}=1 | A=b)$, requiring equal positive prediction rates across groups.
+
+\textbf{Equalized Odds} (Separation-Based): $P(\hat{Y}=1 | A=a, Y=y) = P(\hat{Y}=1 | A=b, Y=y)$ for all $y$, requiring equal true positive rates and false positive rates.
+
+\textbf{Equal Opportunity}: A relaxation of Equalized Odds that requires only equal true positive rates: $P(\hat{Y}=1 | A=a, Y=1) = P(\hat{Y}=1 | A=b, Y=1)$.
+
+Kleinberg et al.\ (2016) proved an impossibility theorem showing that calibration, equalized odds, and unequal base rates cannot be simultaneously satisfied~\cite{mentalmap}, motivating the use of multiple complementary metrics as implemented in FairLint-DL.
+
+\subsection{Causal Fairness}
+
+Causal fairness, grounded in Pearl's framework of structural causal models, requires that the prediction is causally independent of protected attributes. Path-specific fairness further distinguishes between fair and unfair causal pathways, blocking only the latter. FairLint-DL's causal debugging algorithm traces the causal influence of protected attributes through the network's internal structure.
+
+\section{Information-Theoretic Fairness Testing: DICE}
+
+The DICE framework~\cite{dice} introduced Quantitative Individual Discrimination (QID) as an information-theoretic characterization of discrimination. QID is defined as the amount of protected information---characterized by Shannon entropy and min-entropy---used in deriving an outcome. A zero QID value implies the absence of individual discrimination, while higher values indicate greater reliance on protected information. DICE also introduced a causal debugging algorithm (Algorithm~2 in~\cite{dice}) that uses interventions on neuron activations to localize layers and neurons with significant causal effects on QID. On the Adult Census dataset, DICE discovered 36 clusters from 14 initial clusters, generating 230,593 test cases with QID values up to 5.3 bits, and identified the second layer as the most bias-sensitive.
+
+\section{NeuFair: Neural Network Fairness Repair}
+
+NeuFair~\cite{neufair} extends the search algorithm for finding discriminatory instances using a two-phase global-local approach with gradient-based optimization. NeuFair formulates fairness repair as a simulated annealing optimization problem over neuron dropout configurations, using a cost function that balances Equalized Odds Difference (EOD) minimization with F1 score preservation. NeuFair substantially outperforms DICE in improving fairness through multi-neuron dropout strategies.
+
+\section{Extreme Value Theory for Fairness}
+
+The EVT framework~\cite{evt_cain} applies extreme value theory to model the worst-case convergence times and extreme counterfactual discrimination in ML systems. By fitting Generalized Extreme Value (GEV) distributions to the tail of discrimination measurements, EVT provides probabilistic guarantees on worst-case bias scenarios, complementing the average-case analysis of QID.
+
+\section{FairLay-ML: GUI MLOps Pipeline}
+
+FairLay-ML~\cite{fairlayml} presents a GUI MLOps pipeline for fairness debugging that allows users to upload data and ML models for counterfactual testing. It implements feature interaction visualization, model logic explanation via LIME, and manual manipulation of test cases. FairLint-DL extends this paradigm by integrating directly into the IDE and adding deep learning-specific analysis capabilities including causal debugging and gradient-guided search.
+
+\section{Explainability Methods}
+
+\textbf{SHAP} (SHapley Additive exPlanations) computes the exact contribution of each feature to every prediction using game-theoretic Shapley values. The KernelExplainer variant is model-agnostic and operates on arbitrary prediction functions.
+
+\textbf{LIME} (Local Interpretable Model-agnostic Explanations) approximates the model locally around each instance with a simple linear model by generating perturbations and observing prediction changes. LIME provides complementary local explanations that can reveal context-dependent bias patterns.
