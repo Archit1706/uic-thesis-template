@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: thesisphd.aux
+The style file: bin/formb.bst
+Database file #1: src/bibphd.bib
+Warning--I didn't find a database entry for "mentalmap"
+You've used 8 entries,
+            2045 wiz_defined-function locations,
+            526 strings with 5803 characters,
+and the built_in function-call counts, 2505 in all, are:
+= -- 198
+> -- 166
+< -- 5
++ -- 58
+- -- 50
+* -- 191
+:= -- 391
+add.period$ -- 16
+call.type$ -- 8
+change.case$ -- 8
+chr.to.int$ -- 0
+cite$ -- 8
+duplicate$ -- 101
+empty$ -- 210
+format.name$ -- 50
+if$ -- 567
+int.to.chr$ -- 0
+int.to.str$ -- 8
+missing$ -- 5
+newline$ -- 49
+num.names$ -- 8
+pop$ -- 32
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 73
+stack$ -- 0
+substring$ -- 136
+swap$ -- 45
+text.length$ -- 5
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 19
+width$ -- 9
+write$ -- 88
+(There was 1 warning)

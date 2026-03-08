@@ -1,0 +1,13 @@
+\contentsline {table}{\numberline {I}{\ignorespaces FairLint-DL REST API endpoints.}}{11}{table.caption.2}%
+\contentsline {table}{\numberline {II}{\ignorespaces FairLint-DL technology stack.}}{19}{table.caption.3}%
+\contentsline {table}{\numberline {III}{\ignorespaces Dataset split and model configuration.}}{24}{table.caption.5}%
+\contentsline {table}{\numberline {IV}{\ignorespaces QID analysis results on the Adult Census dataset.}}{26}{table.caption.7}%
+\contentsline {table}{\numberline {V}{\ignorespaces Group fairness metrics by protected attribute.}}{27}{table.caption.9}%
+\contentsline {table}{\numberline {VI}{\ignorespaces Layer sensitivity analysis results.}}{30}{table.caption.11}%
+\contentsline {table}{\numberline {VII}{\ignorespaces Top 5 biased neurons in Layer 2.}}{32}{table.caption.13}%
+\contentsline {table}{\numberline {VIII}{\ignorespaces SHAP global feature importance (log-odds space).}}{34}{table.caption.15}%
+\contentsline {table}{\numberline {IX}{\ignorespaces LIME aggregated feature importance (top 5).}}{35}{table.caption.16}%
+\contentsline {table}{\numberline {X}{\ignorespaces Composite fairness score breakdown.}}{37}{table.caption.18}%
+\contentsline {table}{\numberline {XI}{\ignorespaces Analysis pipeline timing (cached model).}}{39}{table.caption.20}%
+\contentsline {table}{\numberline {XII}{\ignorespaces Per-group confusion matrices for all protected attributes.}}{54}{table.caption.29}%
+\contentsfinish 

@@ -1,0 +1,49 @@
+\begin{thebibliography}{1}
+
+\bibitem{dice}
+
+Monjezi, V., Tan, G., and Tizpaz, S.:
+\newblock Information-theoretic testing and debugging of fairness defects in deep neural networks.
+\newblock In {\underl Proceedings of the 45th International Conference on Software Engineering (ICSE) & }, pages 1571--1582, 05 2023.
+
+\bibitem{evt}
+
+Tizpaz-Niari, S., Kumar, A., Tan, G., and Trivedi, A.:
+\newblock Fairness-aware configuration of machine learning libraries.
+\newblock In {\underl Proceedings of the 44th International Conference on Software Engineering & }, ICSE '22, pages 909--920. ACM, May 2022.
+
+\bibitem{fairlearn}
+
+Bird, S., Dud\'ik, M., Edgar, R., Horn, B., Lutz, R., Milan, V., Sameki, M., Wallach, H., and Walker, K.:
+\newblock Fairlearn: A toolkit for assessing and improving fairness in ai.
+\newblock Technical Report MSR-TR-2020-32, Microsoft, May 2020.
+
+\bibitem{Wexler_2019}
+
+Wexler, J., Pushkarna, M., Bolukbasi, T., Wattenberg, M., Viegas, F., and Wilson, J.:
+\newblock The what-if tool: Interactive probing of machine learning models.
+\newblock {\underl IEEE Transactions on Visualization and Computer Graphics & }, pages 1--1, 2019.
+
+\bibitem{bellamy2019}
+
+Bellamy, R. K.~E., Dey, K., Hind, M., Hoffman, S.~C., Houde, S., Kannan, K., Lohia, P., Martino, J., Mehta, S., Mojsilović, A., Nagar, S., Ramamurthy, K.~N., Richards, J., Saha, D., Sattigeri, P., Singh, M., Varshney, K.~R., and Zhang, Y.:
+\newblock Ai fairness 360: An extensible toolkit for detecting and mitigating algorithmic bias.
+\newblock {\underl IBM Journal of Research and Development & }, 63(4/5):4:1--4:15, 2019.
+
+\bibitem{neufair}
+
+Dasu, V.~A., Kumar, A., Tizpaz-Niari, S., and Tan, G.:
+\newblock Neufair: Neural network fairness repair with dropout, 2024.
+
+\bibitem{evt_cain}
+
+Tizpaz-Niari, S. and Sankaranarayanan, S.:
+\newblock Worst-case convergence time of ml algorithms via extreme value theory.
+\newblock In {\underl Proceedings of the IEEE/ACM 3rd International Conference on AI Engineering - Software Engineering for AI & }, CAIN 2024, pages 211--221. ACM, April 2024.
+
+\bibitem{fairlayml}
+
+Yu, N., Carreon, L., Tan, G., and Tizpaz-Niari, S.:
+\newblock Fairlay-ml: Intuitive debugging of fairness in data-driven social-critical software, 2024.
+
+\end{thebibliography}

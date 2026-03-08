@@ -3,60 +3,60 @@
 
 \begin{figure}[H]
     \centering
-    \fbox{\parbox{0.85\textwidth}{\centering\vspace{0.8cm}
-    \textbf{[INSERT FIGURE: Full Dashboard Screenshot --- Overview Section]}\\[0.3cm]
-    \textit{Full-width screenshot of the FairLint-DL dashboard showing the pipeline overview, dataset summary, protected attributes, and fairness score gauge.}
-    \vspace{0.7cm}}}
+    \includegraphics[width=0.95\textwidth]{images/webview/overview.png}
     \caption{FairLint-DL dashboard: Pipeline overview and fairness score.}
     \label{fig:dashboard_overview}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \fbox{\parbox{0.85\textwidth}{\centering\vspace{0.8cm}
-    \textbf{[INSERT FIGURE: Full Dashboard Screenshot --- QID Section]}\\[0.3cm]
-    \textit{Screenshot of the QID analysis section showing mean/max/std QID values, discrimination percentage, disparate impact ratio, and the QID distribution histogram.}
-    \vspace{0.7cm}}}
+    \includegraphics[width=0.95\textwidth]{images/webview/qid-analysis.png}
     \caption{FairLint-DL dashboard: QID analysis section.}
     \label{fig:dashboard_qid}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \fbox{\parbox{0.85\textwidth}{\centering\vspace{0.8cm}
-    \textbf{[INSERT FIGURE: Full Dashboard Screenshot --- Group Fairness Section]}\\[0.3cm]
-    \textit{Screenshot showing the group fairness metrics with attribute selector, DP/EO/EOpp metric cards with Fair/Marginal/Unfair badges, and per-group comparison charts.}
-    \vspace{0.7cm}}}
+    \includegraphics[width=0.95\textwidth]{images/webview/group-fairness-1.png}
+    \includegraphics[width=0.95\textwidth]{images/webview/group-fairness-2.png}
     \caption{FairLint-DL dashboard: Group fairness metrics section.}
     \label{fig:dashboard_group}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \fbox{\parbox{0.85\textwidth}{\centering\vspace{0.8cm}
-    \textbf{[INSERT FIGURE: Full Dashboard Screenshot --- Causal Debugging Section]}\\[0.3cm]
-    \textit{Screenshot showing the layer sensitivity bar chart, most biased layer identification, and neuron impact bar chart with interpretive text.}
-    \vspace{0.7cm}}}
+    \includegraphics[width=0.95\textwidth]{images/webview/causal-debugger.png}
     \caption{FairLint-DL dashboard: Causal debugging section.}
     \label{fig:dashboard_causal}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \fbox{\parbox{0.85\textwidth}{\centering\vspace{0.8cm}
-    \textbf{[INSERT FIGURE: Full Dashboard Screenshot --- SHAP/LIME Section]}\\[0.3cm]
-    \textit{Screenshot showing the SHAP global importance bar chart, beeswarm plot, LIME aggregated importance, and the interactive LIME explorer with a per-instance explanation.}
-    \vspace{0.7cm}}}
-    \caption{FairLint-DL dashboard: SHAP and LIME explainability section.}
+    \includegraphics[width=0.95\textwidth]{images/webview/shap-explanations-1.png}
+    \includegraphics[width=0.95\textwidth]{images/webview/shap-explanations-2.png}
+    \includegraphics[width=0.95\textwidth]{images/webview/shap-explanations-3.png}
+    \caption{FairLint-DL dashboard: SHAP explainability section.}
     \label{fig:dashboard_explain}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \fbox{\parbox{0.85\textwidth}{\centering\vspace{0.8cm}
-    \textbf{[INSERT FIGURE: Internal Space Visualization]}\\[0.3cm]
-    \textit{PCA scatter plots for each layer showing how the network separates data points, colored by protected attribute values. Observe the increasing separation in deeper layers.}
-    \vspace{0.7cm}}}
+    \includegraphics[width=0.95\textwidth]{images/webview/lime-explanation.png}
+    \caption{FairLint-DL dashboard: LIME explainability section.}
+    \label{fig:dashboard_explain}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{images/webview/per-instance-lime-explanation.png}
+    \caption{FairLint-DL dashboard: Per-instance based LIME explainability section.}
+    \label{fig:dashboard_explain}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{images/webview/internal-space-viz-1.png}
+    \includegraphics[width=0.95\textwidth]{images/webview/internal-space-viz-2.png}
     \caption{Internal space PCA visualization across network layers.}
     \label{fig:internal_space}
 \end{figure}

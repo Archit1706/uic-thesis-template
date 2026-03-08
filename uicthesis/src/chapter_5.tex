@@ -103,10 +103,7 @@ The \textbf{sex} attribute exhibits the most severe bias: a demographic parity r
 
 \begin{figure}[H]
     \centering
-    \fbox{\parbox{0.85\textwidth}{\centering\vspace{0.5cm}
-    \textbf{[INSERT FIGURE: Group Fairness Comparison Charts]}\\[0.3cm]
-    \textit{Grouped bar charts showing positive prediction rate, TPR, and FPR comparisons between Group A and Group B for each protected attribute (sex, age, race, native-country).}
-    \vspace{0.5cm}}}
+    \includegraphics[width=0.95\textwidth]{images/group-fairness.png}
     \caption{Group fairness metric comparisons across protected attributes.}
     \label{fig:group_fairness}
 \end{figure}
@@ -143,10 +140,7 @@ Layer 6 (Output) & 2 & 0.124 & 6.4\% \\
 
 \begin{figure}[H]
     \centering
-    \fbox{\parbox{0.85\textwidth}{\centering\vspace{0.5cm}
-    \textbf{[INSERT FIGURE: Layer Sensitivity Bar Chart]}\\[0.3cm]
-    \textit{Bar chart showing sensitivity scores for all 6 layers, with Layer 2 highlighted as the most sensitive.}
-    \vspace{0.5cm}}}
+    \includegraphics[width=0.95\textwidth]{images/layer-sensitivity.png}
     \caption{Layer sensitivity analysis identifying Layer 2 as the bias-critical layer.}
     \label{fig:layer_sensitivity}
 \end{figure}
@@ -176,10 +170,7 @@ Neurons 30 and 17 have disproportionately high impact scores, suggesting they ha
 
 \begin{figure}[H]
     \centering
-    \fbox{\parbox{0.85\textwidth}{\centering\vspace{0.5cm}
-    \textbf{[INSERT FIGURE: Neuron Impact Bar Chart]}\\[0.3cm]
-    \textit{Bar chart showing the impact scores of the top 5 neurons in Layer 2.}
-    \vspace{0.5cm}}}
+    \includegraphics[width=0.95\textwidth]{images/neuron-impact.png}
     \caption{Neuron-level impact scores within Layer 2.}
     \label{fig:neuron_impact}
 \end{figure}
@@ -238,10 +229,7 @@ Both SHAP and LIME agree that \textbf{education-num} is among the most important
 
 \begin{figure}[H]
     \centering
-    \fbox{\parbox{0.85\textwidth}{\centering\vspace{0.5cm}
-    \textbf{[INSERT FIGURE: SHAP and LIME Feature Importance Charts]}\\[0.3cm]
-    \textit{Side-by-side bar charts showing SHAP global feature importance (left) and LIME aggregated importance (right), with protected attributes highlighted in red/orange.}
-    \vspace{0.5cm}}}
+    \includegraphics[width=0.95\textwidth]{images/shap-lime.png}
     \caption{SHAP and LIME feature importance comparison.}
     \label{fig:explainability}
 \end{figure}
@@ -273,10 +261,7 @@ The final score of approximately \textbf{41 out of 100} is rated \textbf{``Conce
 
 \begin{figure}[H]
     \centering
-    \fbox{\parbox{0.85\textwidth}{\centering\vspace{0.5cm}
-    \textbf{[INSERT FIGURE: Fairness Score Gauge]}\\[0.3cm]
-    \textit{Screenshot of the Plotly.js gauge chart showing the score of approximately 41, with the needle in the red ``Concerning'' zone.}
-    \vspace{0.5cm}}}
+    \includegraphics[width=0.95\textwidth]{images/fairness-gauge.png}
     \caption{Composite fairness score gauge for the Adult Census dataset.}
     \label{fig:gauge}
 \end{figure}

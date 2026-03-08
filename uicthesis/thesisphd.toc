@@ -1,0 +1,80 @@
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {1\hskip 2em}\uppercase {Introduction}}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Motivation}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}The Shift-Left Fairness Testing Paradigm}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Problem Statement}{2}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Contributions}{3}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Report Organization}{4}{section.1.5}%
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {2\hskip 2em}\uppercase {Background and Related Work}}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Fairness Definitions}{5}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Individual Fairness}{5}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Group Fairness}{5}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Causal Fairness}{6}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Information-Theoretic Fairness Testing: DICE}{6}{section.2.2}%
+\contentsline {section}{\numberline {2.3}NeuFair: Neural Network Fairness Repair}{7}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Extreme Value Theory for Fairness}{7}{section.2.4}%
+\contentsline {section}{\numberline {2.5}FairLay-ML: GUI MLOps Pipeline}{7}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Explainability Methods}{8}{section.2.6}%
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {3\hskip 2em}\uppercase {System Architecture and Design}}{9}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Client-Server Architecture}{9}{section.3.1}%
+\contentsline {section}{\numberline {3.2}REST API Endpoints}{10}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Project Structure}{12}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Six-Step Analysis Pipeline}{13}{section.3.4}%
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {4\hskip 2em}\uppercase {Algorithmic Methodology}}{14}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Deep Neural Network Proxy Model}{14}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Quantitative Individual Discrimination (QID)}{14}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Shannon Entropy QID}{15}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Min-Entropy QID and Disparate Impact}{15}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Gradient-Guided Discriminatory Instance Search}{16}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Phase 1: Global Search (Gradient Ascent)}{16}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Phase 2: Local Search (Perturbation)}{16}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Causal Debugging}{16}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Layer Localization}{16}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Neuron Localization}{17}{subsection.4.4.2}%
+\contentsline {section}{\numberline {4.5}Group Fairness Metrics}{17}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Explainability: SHAP and LIME}{18}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}SHAP on Log-Odds Space}{18}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}LIME Local Explanations}{18}{subsection.4.6.2}%
+\contentsline {section}{\numberline {4.7}Composite Fairness Score}{18}{section.4.7}%
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {5\hskip 2em}\uppercase {Implementation}}{19}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Technology Stack}{19}{section.5.1}%
+\contentsline {section}{\numberline {5.2}DNN Model Architecture}{19}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Model Caching System}{20}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Data Preprocessing}{21}{section.5.4}%
+\contentsline {section}{\numberline {5.5}VS Code Extension Integration}{21}{section.5.5}%
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {6\hskip 2em}\uppercase {Experimental Evaluation}}{23}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Dataset: Adult Census Income}{23}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Model Training Results}{24}{section.6.2}%
+\contentsline {section}{\numberline {6.3}QID Analysis Results}{25}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Group Fairness Results}{27}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Discriminatory Instance Search Results}{29}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Causal Debugging Results}{30}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}Layer Sensitivity Analysis}{30}{subsection.6.6.1}%
+\contentsline {subsection}{\numberline {6.6.2}Neuron-Level Analysis}{31}{subsection.6.6.2}%
+\contentsline {section}{\numberline {6.7}Explainability Results}{33}{section.6.7}%
+\contentsline {subsection}{\numberline {6.7.1}SHAP Global Feature Importance}{33}{subsection.6.7.1}%
+\contentsline {subsection}{\numberline {6.7.2}LIME Aggregated Feature Importance}{35}{subsection.6.7.2}%
+\contentsline {section}{\numberline {6.8}Composite Fairness Score}{36}{section.6.8}%
+\contentsline {section}{\numberline {6.9}Performance Timing}{39}{section.6.9}%
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {7\hskip 2em}\uppercase {Discussion}}{40}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Interpretation of Results}{40}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Cross-Method Validation}{41}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Sources of Bias}{41}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Limitations}{42}{section.7.4}%
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {8\hskip 2em}\uppercase {Conclusion and Future Work}}{43}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Conclusion}{43}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Future Work}{44}{section.8.2}%
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {\ }APPENDICES}{45}{section.8.2}%
+\contentsline {chapter}{\xnumberline {\ }\ \ \ \ \ Appendix A}{46}{appendix.A}%
+\contentsline {chapter}{\xnumberline {\ }\ \ \ \ \ Appendix B}{54}{appendix.B}%
+\addvspace {\baselineskip }
+\contentsline {chapter}{\xnumberline {\ }CITED LITERATURE}{55}{table.caption.29}%
+\contentsfinish 

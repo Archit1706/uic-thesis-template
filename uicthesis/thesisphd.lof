@@ -1,0 +1,18 @@
+\contentsline {figure}{\numberline {1}{\ignorespaces FairLint-DL client-server architecture overview.}}{10}{figure.caption.1}%
+\contentsline {figure}{\numberline {2}{\ignorespaces FairLint-DL context menu integration in VS Code.}}{22}{figure.caption.4}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Training and validation curves over 30 epochs.}}{25}{figure.caption.6}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Distribution of QID values across 500 analyzed instances.}}{27}{figure.caption.8}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Group fairness metric comparisons across protected attributes.}}{29}{figure.caption.10}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Layer sensitivity analysis identifying Layer 2 as the bias-critical layer.}}{31}{figure.caption.12}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Neuron-level impact scores within Layer 2.}}{33}{figure.caption.14}%
+\contentsline {figure}{\numberline {8}{\ignorespaces SHAP and LIME feature importance comparison.}}{36}{figure.caption.17}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Composite fairness score gauge for the Adult Census dataset.}}{38}{figure.caption.19}%
+\contentsline {figure}{\numberline {10}{\ignorespaces FairLint-DL dashboard: Pipeline overview and fairness score.}}{46}{figure.caption.21}%
+\contentsline {figure}{\numberline {11}{\ignorespaces FairLint-DL dashboard: QID analysis section.}}{47}{figure.caption.22}%
+\contentsline {figure}{\numberline {12}{\ignorespaces FairLint-DL dashboard: Group fairness metrics section.}}{48}{figure.caption.23}%
+\contentsline {figure}{\numberline {13}{\ignorespaces FairLint-DL dashboard: Causal debugging section.}}{49}{figure.caption.24}%
+\contentsline {figure}{\numberline {14}{\ignorespaces FairLint-DL dashboard: SHAP explainability section.}}{50}{figure.caption.25}%
+\contentsline {figure}{\numberline {15}{\ignorespaces FairLint-DL dashboard: LIME explainability section.}}{51}{figure.caption.26}%
+\contentsline {figure}{\numberline {16}{\ignorespaces FairLint-DL dashboard: Per-instance based LIME explainability section.}}{52}{figure.caption.27}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Internal space PCA visualization across network layers.}}{53}{figure.caption.28}%
+\contentsfinish 
